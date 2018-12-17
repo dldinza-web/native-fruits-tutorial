@@ -3,7 +3,7 @@ export class User {
   passwd: string;
 
   constructor() {
-    this.email = 'test@enterprise.component';
-    this.passwd = '123';
+    this.email = 'Sincere@april.biz';
+    this.passwd = 'Bret';
   }
 }

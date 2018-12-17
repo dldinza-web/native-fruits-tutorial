@@ -8,9 +8,10 @@ import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { AppComponent } from "./app.component";
 
 import { LoginComponent } from "./login/login.component";
+import { ListComponent } from "./list/list.component";
 
 import { UserService } from "./services/user.service";
-
+import { AuthenticationService } from "./services/authentication.service";
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
@@ -27,10 +28,12 @@ import { UserService } from "./services/user.service";
     ],
     declarations: [
         AppComponent,
-        LoginComponent
+        LoginComponent,
+        ListComponent
     ],
     providers: [
-        UserService
+        UserService,
+        AuthenticationService
     ],
     schemas: [
         NO_ERRORS_SCHEMA
