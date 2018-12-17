@@ -10,14 +10,15 @@
       autocorrect="false"
       autocapitalizationType="none"
       class="input input-border"
+      [(ngModel)]="user.email"
     ></TextField>
     <TextField
       hint="Password"
       secure="true"
       class="input input-border"
+      [(ngModel)]="user.passwd"
     ></TextField>
 
-    <Button text="Sign in" class="btn btn-primary"></Button>
-    <Button text="Sign up for Groceries" class="btn"></Button>
+    <Button text="Sign in" class="btn btn-primary" (tap)="onSignIn()"></Button>
   </StackLayout>
 </FlexboxLayout>
