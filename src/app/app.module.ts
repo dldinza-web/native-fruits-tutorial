@@ -2,11 +2,15 @@ import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 
 import { AppRoutingModule } from "./app-routing.module";
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { NativeScriptHttpModule } from "nativescript-angular/http";
+
 import { AppComponent } from "./app.component";
+
 import { LoginComponent } from "./login/login.component";
 
-// Uncomment and add to NgModule imports if you need to use two-way binding
-// import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { UserService } from "./services/user.service";
+
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
@@ -17,13 +21,17 @@ import { LoginComponent } from "./login/login.component";
     ],
     imports: [
         NativeScriptModule,
+        NativeScriptFormsModule,
+        NativeScriptHttpModule,
         AppRoutingModule
     ],
     declarations: [
         AppComponent,
         LoginComponent
     ],
-    providers: [],
+    providers: [
+        UserService
+    ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]
