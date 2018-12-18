@@ -1,1 +1,9 @@
-<ActionBar title="List"></ActionBar>
+<ActionBar title="Items"></ActionBar>
+
+<GridLayout>
+  <RadListView [items]="items">
+    <ng-template let-item="item">
+      <Label [text]="item.email" class="p-15"></Label>
+    </ng-template>
+  </RadListView>
+</GridLayout>

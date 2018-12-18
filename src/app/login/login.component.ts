@@ -1,5 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+
+import { Page } from 'tns-core-modules/ui/page';
 
 import { User } from "../models/user.model";
 import { UserService } from "../services/user.service";
@@ -12,16 +14,21 @@ import { AuthenticationService } from "../services/authentication.service";
   styleUrls: ["./login.component.css"]
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   user: User;
   isLoggedIn = false;
 
   constructor(
     private userSvc: UserService,
     private authSrv: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private page: Page
   ) {
-    this.user = new User();
+    this.user = new User('Sincere@april.biz', 'Bret');
+  }
+
+  ngOnInit() {
+    this.page.actionBarHidden = true;
   }
 
   onSignIn() {
@@ -48,7 +55,7 @@ export class LoginComponent {
     console.log("User registered: " + data);
   }
 
-  private showErrorMessage(error) {
+  showErrorMessage(error) {
     alert(error);
   }
 }
