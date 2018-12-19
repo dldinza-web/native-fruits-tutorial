@@ -16,3 +16,9 @@ ActionBar {
   color: white;
   background-color: black;
 }
+
+GridLayout.overlay {
+  background-color: black;
+  opacity: 0.4;
+}
+

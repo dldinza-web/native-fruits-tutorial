@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, tap } from "rxjs/operators";
 
@@ -15,10 +15,9 @@ export class AuthenticationService {
   ) {}
 
   login(user: User):Observable<boolean> {
-    let url = this.getApiUrl() + '?' + this.getAuthParams(user);
-
     return this.http.get(
-      url,{ headers: this.getCommonHeaders() }
+      this.getApiUrl()
+      ,{ headers: this.getCommonHeaders(), params: this.getAuthParams(user) }
     )
     .pipe(
       map((resp: Response) => {
@@ -31,11 +30,12 @@ export class AuthenticationService {
   }
 
   private getAuthParams(user: User) {
-    let params = [];
-    params.push('email=' + user.email);
-    params.push('username=' + user.passwd);
+    let params = new URLSearchParams();
 
-    return params.join('&');
+    params.append('email', user.email);
+    params.append('username', user.passwd);
+
+    return params
   }
 
   private getCommonHeaders() {

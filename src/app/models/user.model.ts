@@ -1,9 +1,11 @@
 export class User {
-  email: string;
-  passwd: string;
-
-  constructor() {
-    this.email = 'Sincere@april.biz';
-    this.passwd = 'Bret';
+  constructor(
+    public id: number,
+    public email: string,
+    public passwd: string
+  ) {
+    this.id = id || null;
+    this.email = email || '';
+    this.passwd = passwd || '';
   }
 }
