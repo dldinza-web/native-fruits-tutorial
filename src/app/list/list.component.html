@@ -1,9 +1,26 @@
-<ActionBar title="Items"></ActionBar>
+<ActionBar title="Members"></ActionBar>
 
-<GridLayout>
-  <RadListView [items]="items">
+<GridLayout rows="auto, *">
+  <GridLayout row="0" columns="*, auto" class="frmUser">
+    <GridLayout col="0" rows="auto, auto">
+      <TextField row="0" #edtItemEmail [(ngModel)]="email"  hint="Enter an email"></TextField>
+      <TextField row="1" #edtItemUsername [(ngModel)]="username" hint="Enter an username"></TextField>
+    </GridLayout>
+    <Image col="1" src="~/images/add.png" width="17" class="btn-add" (tap)="addUser()"></Image>
+  </GridLayout>
+
+  <RadListView row="1" [items]="items" swipeActions="true" [class.fadeInAnimation]="listLoaded" (itemSwipeProgressStarted)="onSwipeCellStarted($event)">
     <ng-template let-item="item">
       <Label [text]="item.email" class="p-15"></Label>
     </ng-template>
+
+    <GridLayout *tkListItemSwipeTemplate columns="*, auto">
+      <StackLayout id="delete-view" col="1" class="delete-view bg-primary" (tap)="onItemDelete($event)">
+        <Image src="~/images/delete.png"></Image>
+      </StackLayout>
+    </GridLayout>
   </RadListView>
+
 </GridLayout>
+
+<ActivityIndicator [busy]="isLoading" [visibility]="isLoading ? 'visible' : 'collapse'" row="1" horizontalAlignment="center" verticalAlignment="center"></ActivityIndicator>

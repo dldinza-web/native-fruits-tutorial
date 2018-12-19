@@ -23,8 +23,48 @@ export class UserService {
     )
     .pipe(
       map((resp: Response) => resp.json() )
-      ,tap((items) => { return this.mapUsers(items) })
+      ,map((items) => { return this.mapUsers(items) })
       ,catchError(this.handleErrors)
+    );
+  }
+
+  delete(user: User) {
+    return this.http.delete(
+      this.getApiUrl() + '/' + user.id
+      , { headers: this.getCommonHeaders() }
+    )
+    .pipe(
+      map((resp: Response) => {
+        if (resp.status === 200) {
+          return user;
+        }
+
+        throw this.getUnexpectedError(resp);
+      })
+      ,tap((user: User) => { console.log(`User Removed: ${JSON.stringify(user)}`); })
+      ,catchError(this.handleErrors)
+    );
+  }
+
+  save(user: User) {
+    if (!user.id) { return this.create(user); }
+  }
+
+  create(user: User) {
+    return this.http.post(
+      this.getApiUrl()
+      , JSON.stringify(user)
+      , { headers: this.getCommonHeaders() }
+    ).pipe(
+      map((resp: Response) => {
+        if (resp.status === 201) {
+          console.log("Record created: ", resp.json());
+          return resp.json();
+        }
+
+        throw this.getUnexpectedError(resp);
+      })
+      , catchError(this.handleErrors)
     );
   }
 
@@ -33,7 +73,7 @@ export class UserService {
   }
 
   toUser(item):User {
-    return new User(item.email, item.username)
+    return new User(item.id, item.email, item.username)
   }
 
   private getApiUrl() {
@@ -50,5 +90,9 @@ export class UserService {
   private handleErrors(resp: Response) {
     console.log("Error: " + resp);
     return throwError(resp);
+  }
+
+  private getUnexpectedError(resp: Response) {
+    return `Unexpected Response: [Status: ${resp.status}] ${JSON.stringify(resp.json())}`;
   }
 }

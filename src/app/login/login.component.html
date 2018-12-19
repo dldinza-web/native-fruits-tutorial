@@ -22,3 +22,5 @@
     <Button text="Sign in" class="btn btn-primary" (tap)="onSignIn()"></Button>
   </StackLayout>
 </FlexboxLayout>
+
+<ActivityIndicator [busy]="isLoading" [visibility]="isLoading ? 'visible' : 'collapse'" row="1" horizontalAlignment="center" verticalAlignment="center"></ActivityIndicator>

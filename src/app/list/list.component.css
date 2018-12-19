@@ -1,0 +1,43 @@
+.frmUser {
+  padding: 5 10;
+}
+
+.frmUser Image.btn-add {
+  height: 25;
+  vertical-align: center;
+  margin: 0 10;
+}
+
+.frmUser TextField {
+  padding: 10;
+}
+
+Label {
+  background-color: white;
+  border-bottom-width: 1;
+  border-bottom-color: #eee;
+}
+
+.delete-view {
+  padding: 20;
+}
+
+.delete-view Image {
+  color: white;
+}
+
+ListView {
+  opacity: 0;
+}
+
+.fadeInAnimation {
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0;  }
+  to { opacity: 1;  }
+
+}

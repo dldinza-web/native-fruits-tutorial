@@ -17,6 +17,7 @@ import { AuthenticationService } from "../services/authentication.service";
 export class LoginComponent implements OnInit {
   user: User;
   isLoggedIn = false;
+  isLoading: boolean;
 
   constructor(
     private userSvc: UserService,
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private page: Page
   ) {
-    this.user = new User('Sincere@april.biz', 'Bret');
+    this.user = new User(null, 'Sincere@april.biz', 'Bret');
+    this.isLoading = false;
   }
 
   ngOnInit() {
@@ -33,11 +35,13 @@ export class LoginComponent implements OnInit {
 
   onSignIn() {
     let self = this;
+    this.isLoading = true;
 
     this.authSrv.login(this.user)
       .subscribe(
         (data) => { self.onSignedUp(data) }
         ,(error) => { self.showErrorMessage(error) }
+        ,() => { this.isLoading = false; }
       );
   }
 
